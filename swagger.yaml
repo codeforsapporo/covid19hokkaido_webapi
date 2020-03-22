@@ -30,12 +30,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Patients'
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+        # default:
+        #   description: unexpected error
+        #   content:
+        #     application/json:
+        #       schema:
+        #         $ref: '#/components/schemas/Error'
                 
 components:
   schemas:
