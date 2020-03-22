@@ -11,7 +11,7 @@ info:
     url: https://creativecommons.org/licenses/by/4.0/deed.ja
 
 servers:
-  - url: https://raw.githubusercontent.com/Kanahiro/covid19hokkaido_scraping/gh-pages
+  - url: https://raw.githubusercontent.com/codeforsapporo/covid19hokkaido_scraping/gh-pages
 
 tags:
   - name: 患者統計情報
