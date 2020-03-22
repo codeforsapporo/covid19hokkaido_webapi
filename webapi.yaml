@@ -35,15 +35,15 @@ paths:
                     items:
                       properties:
                         日付:
-                          $ref: '#/components/schemas/日付'
+                          $ref: '#/components/schemas/datetime'
                         曜日:
-                          $ref: '#/components/schemas/曜日'
+                          $ref: '#/components/schemas/day_of_week'
                         9-13時:
-                          $ref: '#/components/schemas/9-13時'
+                          $ref: '#/components/schemas/9-13'
                         13-17時:
-                          $ref: '#/components/schemas/13-17時'
+                          $ref: '#/components/schemas/13-17'
                         17-21時: 
-                          $ref: '#/components/schemas/17-21時'
+                          $ref: '#/components/schemas/17-21'
                         date:
                           $ref: '#/components/schemas/date'
                         w:
@@ -51,7 +51,7 @@ paths:
                         short_date:
                           $ref: '#/components/schemas/short_date'
                         小計:
-                          $ref: '#/components/schemas/小計'
+                          $ref: '#/components/schemas/subtotal'
                   last_update:
                     $ref: '#/components/schemas/last_update'
 
@@ -72,17 +72,17 @@ paths:
                     items:
                       properties:
                         日付:
-                          $ref: '#/components/schemas/日付'
+                          $ref: '#/components/schemas/datetime'
                         患者数:
-                          $ref: '#/components/schemas/患者数'
+                          $ref: '#/components/schemas/number_of_patients'
                         軽症中等症:
-                          $ref: '#/components/schemas/軽症中等症'
+                          $ref: '#/components/schemas/mild_moderate'
                         重症:
-                          $ref: '#/components/schemas/重症'
+                          $ref: '#/components/schemas/severe'
                         死亡: 
-                          $ref: '#/components/schemas/死亡'
+                          $ref: '#/components/schemas/dead'
                         備考:
-                          $ref: '#/components/schemas/備考'
+                          $ref: '#/components/schemas/remark'
                   last_update:
                     $ref: '#/components/schemas/last_update'
 
@@ -103,9 +103,9 @@ paths:
                     items:
                       properties:
                         日付:
-                          $ref: '#/components/schemas/日付'
+                          $ref: '#/components/schemas/datetime'
                         日治療終了数:
-                          $ref: '#/components/schemas/日治療終了数'
+                          $ref: '#/components/schemas/number_of_daily_treatments'
                   last_update:
                     $ref: '#/components/schemas/last_update'
 
@@ -126,9 +126,9 @@ paths:
                     items:
                       properties:
                         日付:
-                          $ref: '#/components/schemas/日付'
+                          $ref: '#/components/schemas/datetime'
                         日検査数:
-                          $ref: '#/components/schemas/日検査数'
+                          $ref: '#/components/schemas/daily_inspections'
                   last_update:
                     $ref: '#/components/schemas/last_update'
 
@@ -164,19 +164,19 @@ paths:
                     items:
                       properties:
                         検査人数:
-                          $ref: '#/components/schemas/検査人数'
+                          $ref: '#/components/schemas/inspection_number'
                         陽性者数:
-                          $ref: '#/components/schemas/陽性者数'
+                          $ref: '#/components/schemas/positives'
                         患者数:
-                          $ref: '#/components/schemas/患者数'
+                          $ref: '#/components/schemas/number_of_patients'
                         軽症・中等症者数:
-                          $ref: '#/components/schemas/軽症・中等症者数'
+                          $ref: '#/components/schemas/number_of_mild_moderate_patients'
                         重傷者数: 
-                          $ref: '#/components/schemas/重傷者数'
+                          $ref: '#/components/schemas/serious_injuries'
                         死亡者数:
-                          $ref: '#/components/schemas/死亡者数'
+                          $ref: '#/components/schemas/deaths'
                         陰性確認数:
-                          $ref: '#/components/schemas/陰性確認数'
+                          $ref: '#/components/schemas/number_of_negative_confirmations'
                   last_update:
                     $ref: '#/components/schemas/last_update'
 
@@ -199,27 +199,27 @@ paths:
                         No:
                           $ref: '#/components/schemas/No'
                         リリース日:
-                          $ref: '#/components/schemas/リリース日'
+                          $ref: '#/components/schemas/release_date'
                         曜日:
-                          $ref: '#/components/schemas/曜日'
+                          $ref: '#/components/schemas/day_of_week'
                         居住地:
-                          $ref: '#/components/schemas/居住地'
+                          $ref: '#/components/schemas/residence'
                         年代: 
-                          $ref: '#/components/schemas/年代'
+                          $ref: '#/components/schemas/age'
                         性別:
-                          $ref: '#/components/schemas/性別'
+                          $ref: '#/components/schemas/sex'
                         属性:
-                          $ref: '#/components/schemas/属性'
+                          $ref: '#/components/schemas/type'
                         備考:
-                          $ref: '#/components/schemas/備考'
+                          $ref: '#/components/schemas/remark'
                         補足:
-                          $ref: '#/components/schemas/補足'
+                          $ref: '#/components/schemas/supplement'
                         退院:
-                          $ref: '#/components/schemas/退院'
+                          $ref: '#/components/schemas/discharge'
                         周囲の状況:
-                          $ref: '#/components/schemas/周囲の状況'
+                          $ref: '#/components/schemas/surrounding_situation'
                         濃厚接触者の状況:
-                          $ref: '#/components/schemas/濃厚接触者の状況'
+                          $ref: '#/components/schemas/close_contact_situation'
                   last_update:
                     $ref: '#/components/schemas/last_update'
 
@@ -240,9 +240,9 @@ paths:
                     items:
                       properties:
                         日付:
-                          $ref: '#/components/schemas/日付'
+                          $ref: '#/components/schemas/datetime'
                         日陽性数:
-                          $ref: '#/components/schemas/日陽性数'
+                          $ref: '#/components/schemas/daily_positives'
                   last_update:
                     $ref: '#/components/schemas/last_update'
 
@@ -263,13 +263,13 @@ paths:
                     items:
                       properties:
                         日付:
-                          $ref: '#/components/schemas/日付'
+                          $ref: '#/components/schemas/datetime'
                         曜日:
-                          $ref: '#/components/schemas/曜日'
+                          $ref: '#/components/schemas/day_of_week'
                         9-17時:
-                          $ref: '#/components/schemas/9-17時'
+                          $ref: '#/components/schemas/9-17'
                         17-翌9時:
-                          $ref: '#/components/schemas/17-翌9時'
+                          $ref: '#/components/schemas/17-after9'
                         date:
                           $ref: '#/components/schemas/date'
                         w:
@@ -277,7 +277,7 @@ paths:
                         short_date:
                           $ref: '#/components/schemas/short_date'
                         小計:
-                          $ref: '#/components/schemas/小計'
+                          $ref: '#/components/schemas/subtotal'
 
 
                   last_update:
@@ -285,82 +285,82 @@ paths:
 
 components:
   schemas:
-    日付:
+    datetime:
       description: 日付
       type: string
       format: date-time
       example: 2020-01-28T00:00
-    曜日:
+    day_of_week:
       description: 曜日
       type: string
       example: 月
-    患者数:
+    number_of_patients:
       description: 患者数
       type: integer
       example: 3
-    軽症中等症:
+    mild_moderate:
       description: 軽症中等症
       type: integer
       example: 22
-    重症:
+    severe:
       description: 重症
       type: integer
       example: 10
-    死亡: 
+    dead: 
       description: 死亡
       type: integer
       example: 10
-    検査人数:
+    inspection_number:
       description: 検査人数
       type: integer
       example: 10
-    陽性者数: 
+    positives: 
       description: 陽性者数
       type: integer
       example: 10
-    日陽性数: 
+    daily_positives: 
       description: 日陽性数
       type: integer
       example: 10
-    軽症・中等症者数: 
+    number_of_mild_moderate_patients: 
       description: 軽症・中等症者数
       type: integer
       example: 10
-    重傷者数: 
+    serious_injuries: 
       description: 重傷者数
       type: integer
       example: 10
-    死亡者数: 
+    deaths: 
       description: 死亡者数
       type: integer
       example: 10
-    陰性確認数: 
+    number_of_negative_confirmations: 
       description: 陰性確認数
       type: integer
       example: 10
 
-    備考:
+    remark:
       description: 備考
       type: string
       example: 10
 
-    9-13時:
+    9-13:
       description: 9-13時
       type: integer
       example: ""
-    13-17時:
+    13-17:
       description: 9-13時
       type: integer
       example: ""
-    17-21時:
+    17-21:
       description: 9-13時
       type: integer
       example: ""
-    9-17時:
+    9-17:
       description: 9-17時
       type: integer
       example: ""
-    17-翌9時:
+    17-after9:
       description: 17-翌9時
       type: integer
       example: ""
@@ -373,17 +373,17 @@ components:
       type: string
       example: 02/19
 
-    小計:
+    subtotal:
       description: 小計
       type: integer
       example: 350
 
-    日治療終了数:
+    number_of_daily_treatments:
       description: 日治療終了数
       type: integer
       example: 1
 
-    日検査数:
+    daily_inspections:
       description: 日検査数
       type: integer
       example: 1
@@ -398,52 +398,51 @@ components:
       type: integer
       example: 1
 
-    リリース日:
+    release_date:
       description: リリース日
       type: string
       format: date-time
       example: 2020-01-28T00:00
 
-    居住地:
+    residence:
       description: 居住地
       type: string
       example: 札幌市
 
-    年代:
+    age:
       description: 年代
       type: string
       example: 40代
 
-    性別:
+    sex:
       description: 性別
       type: string
       example: 女性
 
-    属性:
+    type:
       description: 属性
       type: string
       example: "自営業"
 
-    補足:
+    supplement:
       description: 補足
       type: string
       example: ""
 
-    退院:
+    discharge:
       description: 退院
       type: string
       example: ""
 
-    周囲の状況:
+    surrounding_situation:
       description: 周囲の状況
       type: string
       example: "なし"
 
-    濃厚接触者の状況:
+    close_contact_situation:
       description: 濃厚接触者の状況
       type: string
       example: "濃厚接触者を特定し 健康観察終了"
-
 
     last_update:
       type: string
