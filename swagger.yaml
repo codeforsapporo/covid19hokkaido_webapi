@@ -1,0 +1,157 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: COVID-19 API
+  description: 北海道 新型コロナウイルスまとめサイト向けAPI
+  contact:
+    name: JUST Do It
+    url: https://stopcovid19.hokkaido.dev/about/
+  license:
+    name: Attribution 4.0 International (CC BY 4.0)
+    url: https://creativecommons.org/licenses/by/4.0/deed.ja
+
+tags:
+  - name: 患者統計情報
+    description: 患者統計情報
+
+paths:
+  /patients:
+    get:
+      tags:
+        - 患者統計情報
+      description: COVID-19感染患者数情報
+      responses:
+        '200':
+          description: 患者統計情報
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patients'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /patients/{year}/{month}/{day}:
+    get:
+      tags:
+        - 患者統計情報
+      description: COVID-19感染患者数情報
+      parameters:
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: 年
+          example: 2020
+        - in: path
+          name: month
+          schema:
+            type: integer
+          required: true
+          description: 月
+          example: 3
+        - in: path
+          name: day
+          schema:
+            type: integer
+          required: true
+          description: 日
+          example: 22
+
+      responses:
+        '200':
+          description: 患者統計情報
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientsPerDay'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                
+components:
+  schemas:
+    Patients:
+      allOf:
+        - $ref: '#/components/schemas/PatientsPerDay'
+
+    PatientsPerDay:
+      properties:
+        year:
+          description: 年
+          type: integer
+          example: 2020
+        month:
+          description: 月
+          type: integer    
+          example: 3
+        day:
+          description: 日
+          type: integer
+          example: 22
+        day_inspections:
+          description: 日検査数
+          type: integer
+          example: 10
+        total_inspections:
+          description: 検査累計	
+          type: integer
+          example: 10
+        day_positive_num:
+          description: 日陽性数	
+          type: integer
+          example: 10
+        day_mild_to_moderate:
+          description: 日軽症中等症数
+          type: integer
+          example: 62
+        total_mild_to_moderate:
+          description: 軽症中等症累計
+          type: integer
+          example: 62
+        day_severe_cases:
+          description: 日重症数	
+          type: integer
+          example: 62
+        total_severe_cases:
+          description: 重症累計	
+          type: integer
+          example: 62
+        day_death:
+          description: 日死亡数	
+          type: integer
+          example: 2
+        total_death:
+          description: 死亡累計	
+          type: integer
+          example: 62
+        day_treatments:
+          description: 日治療終了数
+          type: integer
+          example: 62
+        total_treatments:
+          description: 治療終了累計		
+          type: integer
+          example: 62
+        remarks:
+          description: 備考		
+          type: string
+          example: データは日毎の人数で、空白は発表されていないデータである
+
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
