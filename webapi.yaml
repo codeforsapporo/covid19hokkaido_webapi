@@ -1,68 +1,38 @@
 openapi: "3.0.0"
 info:
   version: 1.0.0
-  title: COVID-19 API
-  description: 北海道 新型コロナウイルスまとめサイト向けAPI
+  title: COVID-19 Hokkaido API
+  description: 北海道 新型コロナウイルスまとめサイトAPI
   contact:
     name: JUST Do It
     url: https://stopcovid19.hokkaido.dev/about/
   license:
     name: Attribution 4.0 International (CC BY 4.0)
     url: https://creativecommons.org/licenses/by/4.0/deed.ja
+  
+  x-logo:
+    url: 'https://stopcovid19.hokkaido.dev/ogp.png'
+    altText: COVID-19 Hokkaido API
 
 servers:
-  - url: https://raw.githubusercontent.com/codeforsapporo/covid19hokkaido_scraping/gh-pages
+  - url: https://stopcovid19.hokkaido.dev/api
 
 tags:
   - name: 患者統計情報
-    description: 患者統計情報
 
 paths:
-  /contacts.json:
-    get:
-      tags:
-        - 患者統計情報
-      description: COVID-19感染患者数情報
-      responses:
-        '200':
-          description: 患者統計情報
-          content:
-            application/json:
-              schema:
-                properties:
-                  data:
-                    type: array
-                    items:
-                      properties:
-                        日付:
-                          $ref: '#/components/schemas/datetime'
-                        曜日:
-                          $ref: '#/components/schemas/day_of_week'
-                        9-13時:
-                          $ref: '#/components/schemas/9-13'
-                        13-17時:
-                          $ref: '#/components/schemas/13-17'
-                        17-21時: 
-                          $ref: '#/components/schemas/17-21'
-                        date:
-                          $ref: '#/components/schemas/date'
-                        w:
-                          $ref: '#/components/schemas/w'
-                        short_date:
-                          $ref: '#/components/schemas/short_date'
-                        小計:
-                          $ref: '#/components/schemas/subtotal'
-                  last_update:
-                    $ref: '#/components/schemas/last_update'
-
   /current_patients.json:
     get:
       tags:
         - 患者統計情報
-      description: COVID-19感染患者数情報
+      summary: 現在患者数
+      description: |
+        現在患者数とは、陽性患者数から治療終了者数と死亡者数を除いた人数です。
+        なお、ご覧いただいている時間によっては累計されている日付が違う場合がありますのでご注意ください。
+        死亡者数は北海道のホームページを参照してください。<br>
+        出典: 北海道 オープンデータポータル
       responses:
         '200':
-          description: 患者統計情報
           content:
             application/json:
               schema:
@@ -72,7 +42,7 @@ paths:
                     items:
                       properties:
                         日付:
-                          $ref: '#/components/schemas/datetime'
+                          $ref: '#/components/schemas/date'
                         患者数:
                           $ref: '#/components/schemas/number_of_patients'
                         軽症中等症:
@@ -81,19 +51,20 @@ paths:
                           $ref: '#/components/schemas/severe'
                         死亡: 
                           $ref: '#/components/schemas/dead'
-                        備考:
-                          $ref: '#/components/schemas/remark'
                   last_update:
                     $ref: '#/components/schemas/last_update'
-
   /discharges_summary.json:
     get:
       tags:
         - 患者統計情報
-      description: COVID-19感染患者数情報
+      summary: 治療終了者数
+      description: |
+        治療終了者数とは道発表の「陰性確認済累計」と同じものです。
+        「陰性確認済累計」とは、陽性の患者が軽快してから48時間後の1回目のPCR検査で陰性が確認され、それから12時間後の2回目のPCR検査でも陰性が確認された方の累計のことです。
+        （3/9 鈴木知事のツイートから引用）<br>
+        出典: 北海道 オープンデータポータル
       responses:
         '200':
-          description: 患者統計情報
           content:
             application/json:
               schema:
@@ -109,14 +80,15 @@ paths:
                   last_update:
                     $ref: '#/components/schemas/last_update'
 
-  /inspections.json:
+  /patients_summary.json:
     get:
       tags:
         - 患者統計情報
-      description: COVID-19感染患者数情報
+      summary: 陽性患者数
+      description: |
+        出典: 北海道 オープンデータポータル
       responses:
         '200':
-          description: 患者統計情報
           content:
             application/json:
               schema:
@@ -127,56 +99,8 @@ paths:
                       properties:
                         日付:
                           $ref: '#/components/schemas/datetime'
-                        日検査数:
-                          $ref: '#/components/schemas/daily_inspections'
-                  last_update:
-                    $ref: '#/components/schemas/last_update'
-
-  /last_update.json:
-    get:
-      tags:
-        - 患者統計情報
-      description: COVID-19感染患者数情報
-      responses:
-        '200':
-          description: 患者統計情報
-          content:
-           text/plain:
-              schema:
-                type: string
-                format: date-time
-                example: "2020-03-22T18:05:53.509909+09:00"
-
-  /main_summary.json:
-    get:
-      tags:
-        - 患者統計情報
-      description: COVID-19感染患者数情報
-      responses:
-        '200':
-          description: 患者統計情報
-          content:
-            application/json:
-              schema:
-                properties:
-                  data:
-                    type: array
-                    items:
-                      properties:
-                        検査人数:
-                          $ref: '#/components/schemas/inspection_number'
-                        陽性者数:
-                          $ref: '#/components/schemas/positives'
-                        患者数:
-                          $ref: '#/components/schemas/number_of_patients'
-                        軽症・中等症者数:
-                          $ref: '#/components/schemas/number_of_mild_moderate_patients'
-                        重傷者数: 
-                          $ref: '#/components/schemas/serious_injuries'
-                        死亡者数:
-                          $ref: '#/components/schemas/deaths'
-                        陰性確認数:
-                          $ref: '#/components/schemas/number_of_negative_confirmations'
+                        日陽性数:
+                          $ref: '#/components/schemas/daily_positives'
                   last_update:
                     $ref: '#/components/schemas/last_update'
 
@@ -184,10 +108,11 @@ paths:
     get:
       tags:
         - 患者統計情報
-      description: COVID-19感染患者数情報
+      summary: 陽性患者の属性
+      description: |
+        出典: 北海道 オープンデータポータル
       responses:
         '200':
-          description: 患者統計情報
           content:
             application/json:
               schema:
@@ -197,7 +122,7 @@ paths:
                     items:
                       properties:
                         No:
-                          $ref: '#/components/schemas/No'
+                          $ref: '#/components/schemas/no'
                         リリース日:
                           $ref: '#/components/schemas/release_date'
                         曜日:
@@ -223,14 +148,16 @@ paths:
                   last_update:
                     $ref: '#/components/schemas/last_update'
 
-  /patients_summary.json:
+  /inspections.json:
     get:
       tags:
         - 患者統計情報
-      description: COVID-19感染患者数情報
+      summary: 検査数
+      description: |
+        3月3日以前のデータが公開されていないため、データは3月3日以降となります。<br>
+        出典: 北海道 オープンデータポータル
       responses:
         '200':
-          description: 患者統計情報
           content:
             application/json:
               schema:
@@ -241,19 +168,22 @@ paths:
                       properties:
                         日付:
                           $ref: '#/components/schemas/datetime'
-                        日陽性数:
-                          $ref: '#/components/schemas/daily_positives'
+                        日検査数:
+                          $ref: '#/components/schemas/daily_inspections'
                   last_update:
                     $ref: '#/components/schemas/last_update'
 
-  /querents.json:
+  /contacts.json:
     get:
       tags:
         - 患者統計情報
-      description: COVID-19感染患者数情報
+      summary: 新型コロナコールセンター相談件数
+      description: |
+        札幌市保健所値<br>
+        出典: DATA-SMART CITY SAPPORO
+      link: https://ckan.pf-sapporo.jp/dataset/covid_19_soudan
       responses:
         '200':
-          description: 患者統計情報
           content:
             application/json:
               schema:
@@ -266,185 +196,237 @@ paths:
                           $ref: '#/components/schemas/datetime'
                         曜日:
                           $ref: '#/components/schemas/day_of_week'
-                        9-17時:
-                          $ref: '#/components/schemas/9-17'
-                        17-翌9時:
-                          $ref: '#/components/schemas/17-after9'
                         date:
                           $ref: '#/components/schemas/date'
-                        w:
-                          $ref: '#/components/schemas/w'
                         short_date:
                           $ref: '#/components/schemas/short_date'
                         小計:
                           $ref: '#/components/schemas/subtotal'
-
-
                   last_update:
                     $ref: '#/components/schemas/last_update'
+
+  /querents.json:
+    get:
+      tags:
+        - 患者統計情報
+      summary: 帰国者・接触者電話相談センター相談件数
+      description: |
+        札幌市保健所値<br>
+        出典: DATA-SMART CITY SAPPORO
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: array
+                    items:
+                      properties:
+                        日付:
+                          $ref: '#/components/schemas/datetime'
+                        曜日:
+                          $ref: '#/components/schemas/day_of_week'
+                        date:
+                          $ref: '#/components/schemas/date'
+                        short_date:
+                          $ref: '#/components/schemas/short_date'
+                        小計:
+                          $ref: '#/components/schemas/subtotal'
+                  last_update:
+                    $ref: '#/components/schemas/last_update'
+
+  /main_summary.json:
+    get:
+      tags:
+        - 患者統計情報
+      description: COVID-19感染患者数情報
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: array
+                    items:
+                      properties:
+                        検査人数:
+                          $ref: '#/components/schemas/inspection_number'
+                        陽性者数:
+                          $ref: '#/components/schemas/positives'
+                        患者数:
+                          $ref: '#/components/schemas/number_of_patients'
+                        軽症・中等症者数:
+                          $ref: '#/components/schemas/number_of_mild_moderate_patients'
+                        重傷者数: 
+                          $ref: '#/components/schemas/serious_injuries'
+                        死亡者数:
+                          $ref: '#/components/schemas/deaths'
+                        陰性確認数:
+                          $ref: '#/components/schemas/number_of_negative_confirmations'
+                  last_update:
+                    $ref: '#/components/schemas/last_update'
+
+  /last_update.json:
+    get:
+      tags:
+        - 患者統計情報
+      summary: 全データの最終更新日時
+      responses:
+        '200':
+          content:
+           text/plain:
+              schema:
+                $ref: '#/components/schemas/last_update'
 
 components:
   schemas:
     datetime:
-      description: 日付
+      summary: 日付
       type: string
       format: date-time
-      example: 2020-01-28T00:00
+      example: "2020-02-19T08:00:00.000Z"
     day_of_week:
-      description: 曜日
+      summary: 曜日
       type: string
       example: 月
     number_of_patients:
-      description: 患者数
+      summary: 患者数
       type: integer
       example: 3
     mild_moderate:
-      description: 軽症中等症
+      summary: 軽症中等症
       type: integer
       example: 22
     severe:
-      description: 重症
+      summary: 重症
       type: integer
       example: 10
     dead: 
-      description: 死亡
+      summary: 死亡
       type: integer
       example: 10
     inspection_number:
-      description: 検査人数
+      summary: 検査人数
       type: integer
       example: 10
     positives: 
-      description: 陽性者数
+      summary: 陽性者数
       type: integer
       example: 10
     daily_positives: 
-      description: 日陽性数
+      summary: 日陽性数
       type: integer
       example: 10
     number_of_mild_moderate_patients: 
-      description: 軽症・中等症者数
+      summary: 軽症・中等症者数
       type: integer
       example: 10
     serious_injuries: 
-      description: 重傷者数
+      summary: 重傷者数
       type: integer
       example: 10
     deaths: 
-      description: 死亡者数
+      summary: 死亡者数
       type: integer
       example: 10
     number_of_negative_confirmations: 
-      description: 陰性確認数
+      summary: 陰性確認数
       type: integer
       example: 10
 
     remark:
-      description: 備考
+      summary: 備考
       type: string
       example: 10
 
-    9-13:
-      description: 9-13時
+    9-17時:
+      summary: 9-17時
       type: integer
       example: ""
     13-17:
-      description: 9-13時
+      summary: 9-13時
       type: integer
       example: ""
     17-21:
-      description: 9-13時
+      summary: 9-13時
       type: integer
       example: ""
     9-17:
-      description: 9-17時
+      summary: 9-17時
       type: integer
       example: ""
     17-after9:
-      description: 17-翌9時
+      summary: 17-翌9時
       type: integer
       example: ""
     date:
-      description: 日付
+      summary: 日付
       type: string
-      example: 2020-02-19
+      example: "2020-02-19"
     short_date:
-      description: 日付
+      summary: 日付
       type: string
       example: 02/19
-
     subtotal:
-      description: 小計
+      summary: 小計
       type: integer
       example: 350
-
     number_of_daily_treatments:
-      description: 日治療終了数
+      summary: 日治療終了数
       type: integer
       example: 1
-
     daily_inspections:
-      description: 日検査数
+      summary: 日検査数
       type: integer
       example: 1
-
     w:
-      description: w
+      summary: w
       type: string
       example: ""
-
-    No:
-      description: "No"
+    no:
+      summary: "No"
       type: integer
       example: 1
-
     release_date:
-      description: リリース日
+      summary: リリース日
       type: string
       format: date-time
-      example: 2020-01-28T00:00
-
+      example: "2020-01-28T00:00"
     residence:
-      description: 居住地
+      summary: 居住地
       type: string
       example: 札幌市
-
     age:
-      description: 年代
+      summary: 年代
       type: string
       example: 40代
-
     sex:
-      description: 性別
+      summary: 性別
       type: string
       example: 女性
-
     type:
-      description: 属性
+      summary: 属性
       type: string
       example: "自営業"
-
     supplement:
-      description: 補足
+      summary: 補足
       type: string
       example: ""
-
     discharge:
-      description: 退院
+      summary: 退院
       type: string
       example: ""
-
     surrounding_situation:
-      description: 周囲の状況
+      summary: 周囲の状況
       type: string
       example: "なし"
-
     close_contact_situation:
-      description: 濃厚接触者の状況
+      summary: 濃厚接触者の状況
       type: string
       example: "濃厚接触者を特定し 健康観察終了"
-
     last_update:
       type: string
       format: date-time
-      example: 2020-03-22T01:08:05.250938+09:00
+      example: "2020-04-05T12:53:45.081937+09:00"
