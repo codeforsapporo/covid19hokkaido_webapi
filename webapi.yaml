@@ -1,8 +1,8 @@
 openapi: "3.0.0"
 info:
   version: 1.0.0
-  title: COVID-19 API
-  description: 北海道 新型コロナウイルスまとめサイト向けAPI
+  title: COVID-19 Hokkaido API
+  description: 北海道 新型コロナウイルスまとめサイトAPI
   contact:
     name: JUST Do It
     url: https://stopcovid19.hokkaido.dev/about/
