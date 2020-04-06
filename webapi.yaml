@@ -9,6 +9,10 @@ info:
   license:
     name: Attribution 4.0 International (CC BY 4.0)
     url: https://creativecommons.org/licenses/by/4.0/deed.ja
+  
+  x-logo:
+    url: 'https://stopcovid19.hokkaido.dev/ogp.png'
+    altText: COVID-19 Hokkaido API
 
 servers:
   - url: https://stopcovid19.hokkaido.dev/api
