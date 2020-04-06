@@ -42,7 +42,7 @@ paths:
                     items:
                       properties:
                         日付:
-                          $ref: '#/components/schemas/datetime'
+                          $ref: '#/components/schemas/date'
                         患者数:
                           $ref: '#/components/schemas/number_of_patients'
                         軽症中等症:
@@ -51,8 +51,6 @@ paths:
                           $ref: '#/components/schemas/severe'
                         死亡: 
                           $ref: '#/components/schemas/dead'
-                        備考:
-                          $ref: '#/components/schemas/remark'
                   last_update:
                     $ref: '#/components/schemas/last_update'
   /discharges_summary.json:
@@ -124,7 +122,7 @@ paths:
                     items:
                       properties:
                         No:
-                          $ref: '#/components/schemas/No'
+                          $ref: '#/components/schemas/no'
                         リリース日:
                           $ref: '#/components/schemas/release_date'
                         曜日:
@@ -198,16 +196,8 @@ paths:
                           $ref: '#/components/schemas/datetime'
                         曜日:
                           $ref: '#/components/schemas/day_of_week'
-                        9-13時:
-                          $ref: '#/components/schemas/9-13'
-                        13-17時:
-                          $ref: '#/components/schemas/13-17'
-                        17-21時: 
-                          $ref: '#/components/schemas/17-21'
                         date:
                           $ref: '#/components/schemas/date'
-                        w:
-                          $ref: '#/components/schemas/w'
                         short_date:
                           $ref: '#/components/schemas/short_date'
                         小計:
@@ -237,20 +227,12 @@ paths:
                           $ref: '#/components/schemas/datetime'
                         曜日:
                           $ref: '#/components/schemas/day_of_week'
-                        9-17時:
-                          $ref: '#/components/schemas/9-17'
-                        17-翌9時:
-                          $ref: '#/components/schemas/17-after9'
                         date:
                           $ref: '#/components/schemas/date'
-                        w:
-                          $ref: '#/components/schemas/w'
                         short_date:
                           $ref: '#/components/schemas/short_date'
                         小計:
                           $ref: '#/components/schemas/subtotal'
-
-
                   last_update:
                     $ref: '#/components/schemas/last_update'
 
@@ -296,9 +278,7 @@ paths:
           content:
            text/plain:
               schema:
-                type: string
-                format: date-time
-                example: "2020-03-22T18:05:53.509909+09:00"
+                $ref: '#/components/schemas/last_update'
 
 components:
   schemas:
@@ -449,4 +429,4 @@ components:
     last_update:
       type: string
       format: date-time
-      example: 2020-03-22T01:08:05.250938+09:00
+      example: "2020-04-05T12:53:45.081937+09:00"
